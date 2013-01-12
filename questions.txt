@@ -1,0 +1,9 @@
+1. I'm curious if there is a reason you use
+  expect(page).to have_css '.welcome', text: 'Welcome, person@example.com'
+
+instead of
+  page.should have_css('.welcome', text: 'Welcome, person@example.com')
+
+or is it just a style preference
+
+2. Do you guys have a preferred way of testing titles with capybara 2.
