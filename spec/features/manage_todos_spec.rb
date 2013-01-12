@@ -2,9 +2,7 @@ require 'spec_helper'
 
 feature 'Manage Todos' do
   scenario 'Create a new todo' do
-    visit root_path
-    fill_in 'Email address', with: 'person@example.com'
-    click_button 'Sign In'
+    sign_in
     click_link 'Add a new todo'
     fill_in 'Description', with: 'Buy some underwear'
     click_button 'Create todo'
