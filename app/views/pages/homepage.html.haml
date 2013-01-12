@@ -1,1 +1,7 @@
 %p{'data-role' => 'description'}
+
+= form_for :session, url: session_path do |f|
+  = f.label :email_address
+  = f.text_field :email_address
+  = f.submit 'Sign In'
+

@@ -6,7 +6,7 @@ gem 'sqlite3'
 gem 'haml'
 gem 'haml-rails'
 
-group :test, :develompment do
+group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
 end
