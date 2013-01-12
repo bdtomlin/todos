@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
+gem 'high_voltage'
 gem 'sqlite3'
+gem 'haml'
+gem 'haml-rails'
 
 group :test, :develompment do
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :assets do
