@@ -15,6 +15,15 @@ feature 'Manage Todos' do
     user_does_not_see_todo_item 'Buy a hat'
   end
 
+  scenario 'mark todos as complete' do
+    sign_in
+    create_todo_with_description 'Buy some underwear'
+    within 'li.todo' do
+      click_link 'Complete'
+    end
+    expect(page).to have_css 'li.todo.completed'
+  end
+
   def create_todo_with_description(description)
     click_link 'Add a new todo'
     fill_in 'Description', with: description

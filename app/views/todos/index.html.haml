@@ -1,4 +1,6 @@
 %ul
   - @todos.each do |todo|
-    %li.todo= todo.description
+    %li.todo{class: ('completed' if todo.completed_at?)}
+      = todo.description
+      = link_to 'Complete', todo_completion_path(todo), method: :post
 = link_to 'Add a new todo', new_todo_path
