@@ -3,22 +3,29 @@ require 'spec_helper'
 feature 'Manage Todos' do
   scenario 'Create a new todo' do
     sign_in
-    click_link 'Add a new todo'
-    fill_in 'Description', with: 'Buy some underwear'
-    click_button 'Create todo'
-
-    expect(page).to have_css 'li.todo', text: 'Buy some underwear'
+    create_todo_with_description 'Buy some underwear'
+    user_sees_todo_item('Buy some underwear')
   end
 
   scenario 'view only my todos' do
-    Todo.create(description: 'Buy a hat', owner_email: 'not_me@example.com')
+    create(:todo, description: 'Buy a hat', owner_email: 'not_me@example.com')
     sign_in_as 'me@example.com'
+    create_todo_with_description 'Buy some underwear'
+    user_sees_todo_item('Buy some underwear')
+    user_does_not_see_todo_item 'Buy a hat'
+  end
 
+  def create_todo_with_description(description)
     click_link 'Add a new todo'
-    fill_in 'Description', with: 'Buy some underwear'
+    fill_in 'Description', with: description
     click_button 'Create todo'
+  end
 
-    expect(page).to have_css 'li.todo', text: 'Buy some underwear'
-    expect(page).not_to have_css 'li.todo', text: 'Buy a hat'
+  def user_sees_todo_item(description)
+    expect(page).to have_css 'li.todo', text: description
+  end
+
+  def user_does_not_see_todo_item(description)
+    expect(page).to_not have_css 'li.todo', text: description
   end
 end
